@@ -1,0 +1,196 @@
+\documentclass{article}
+\usepackage{verbatim}
+
+\parindent=0pt
+
+\begin{document}
+
+\section{Document Creation (PDF)}
+\subsection{To build on a machine with linux or Mac OS X}
+\begin{enumerate}
+\item Open terminal and go to the project's directory
+\item Type \begin{verbatim}make slides\end{verbatim} to create slides; or
+\item Type \begin{verbatim}make notes\end{verbatim} to create the notes; or
+\item Type \begin{verbatim}make refs\end{verbatim} to create textbook references.
+\item Type \begin{verbatim}make\end{verbatim} to create slides, notes and textbook references.
+\end{enumerate}
+
+\subsection{To build using a LaTeX IDE (e.g., texniccenter or texshop)}
+\begin{enumerate}
+\item Build main.notes.tex (pdflatex) to get notes.
+\item Build main.slides.tex (pdflatex) to get slides.
+\item Build textbookrefs.tex (pdflatex) to get slides.
+\end{enumerate}
+
+\section{Maintenance of latex files}
+PREREQUISITES: A working knowledge of latex and beamer.\\
+
+Please familiarise yourself with this file hierarchy description before editing.\\
+
+Almost all of your favourite beamer and article mode luxuries should be usable
+using this build system.\\
+
+The files are mostly organised into blocks for things affecting both notes and
+slides, slides only, and notes only.\\
+
+\subsection{File Hierarchy}
+\begin{verbatim}
+main.tex - chapter creation, rearrangement of content order
+should happen here.
+
+packages.tex - contains the packages to be loaded.
+
+formatting.tex - edit the formatting rules of the notes and
+slides (margins, themes, etc).
+
+commands.tex - put all your custom \newcommands and \defs
+etc in here.
+
+environments.tex - put all your custom latex environments
+in here.
+
+variables.tex - put all your custom latex variables here.
+
+precontent.tex - title pages, table of contents, and anything
+before actual content should go here.
+
+textbookrefs.tex - contains an independent file of textbook
+references.
+
+main.notes.tex - necessary to setup lecture note building.
+Mostly leave alone.
+
+main.slides.tex - necessary to setup slide building.
+Mostly leave alone.
+
+Makefile - responsible for the 'make' commands.
+Mostly leave alone.
+\end{verbatim}
+
+\subsection{Adding chapters}
+\begin{enumerate}
+\item Open up main.tex
+
+\item Add the following:
+\begin{verbatim}
+%---------------------------------------------------------
+% YOURCHAPTERNAME
+%---------------------------------------------------------
+\chapter*{YOURCHAPTERNAME}
+%---------------------------------------------------------
+% Fix counters etc and add table of contents entry
+%---------------------------------------------------------
+\addtocounter{chapter}{1}
+\setcounter{section}{0}
+\addtocontents{toc}{{\bf YOURCHAPTERNAME}}
+
+%---------------------------------------------------------
+% Add material here
+%---------------------------------------------------------
+\end{verbatim}
+\end{enumerate}
+
+e.g.,
+\begin{verbatim}
+%---------------------------------------------------------
+% CALCULUS
+%---------------------------------------------------------
+\chapter*{Calculus}
+%---------------------------------------------------------
+% Fix counters etc and add table of contents entry
+%---------------------------------------------------------
+\addtocounter{chapter}{1}
+\setcounter{section}{0}
+\addtocontents{toc}{{\bf Calculus}}
+
+%---------------------------------------------------------
+% Add material here
+%---------------------------------------------------------
+\end{verbatim}
+
+
+\subsection{Adding topics}
+\begin{enumerate}
+\item Create a new file called nameoftopic.tex, e.g., hilbertspaces.tex in an
+appropriate place. e.g., in the calculus subdirectory.
+\item Add \begin{verbatim}\mode*\end{verbatim} so that
+it is the first line.
+\item Write latex as per usual afterwards.
+\item Open up main.tex and find the chapter you want to add it under.  If chapter
+does not exist, then see the section on adding chapters.
+\item Go to the
+\begin{verbatim}
+%---------------------------------------------------------
+% Add material here
+%---------------------------------------------------------
+\end{verbatim}
+part of the chapter.
+
+\item Add the following after the dotted line:
+\begin{verbatim}
+\mode<all> \input{/path/to/new/texfile},
+\end{verbatim}
+
+e.g.,
+\begin{verbatim}
+\mode<all> \input{./calculus/hilbertspaces.tex}
+\end{verbatim}
+
+in that path, the ``.'' refers to the current directory, and so
+\begin{verbatim}
+./calculus/
+\end{verbatim} means
+look in the calculus directory contained in the current directory.
+\end{enumerate}
+
+\subsection{Content: notes and slides}
+By default, content from your tex files will be put into the lecture notes. If
+you wish for some content to appear on slides, then you want to encapsulate it
+inside a frame environment,
+e.g.,
+\begin{verbatim}
+\begin{frame}
+This text will appear in both notes and slides.
+\begin{theorem}
+This theorem will be in both notes and slides.
+\end{theorem}
+\end{frame}
+\end{verbatim}
+
+\subsection{Content: slides only}
+Sometimes you want some slide only content.  You can achieve this by adding:
+\begin{verbatim}
+\mode<presentation> {
+Stuff in here will only appear in slides.
+}
+\end{verbatim}
+
+e.g.,
+\begin{verbatim}
+\begin{frame}
+\mode<presentation> {
+\frametitle{This slide title is only relevant for slides.}
+}
+This text will appear in both notes and slides.
+\begin{theorem}
+This theorem will be in both notes and slides.
+\end{theorem}
+\end{frame}
+\end{verbatim}
+
+\subsection{Content: notes only}
+By default, unless you have a frame environment around something, it will only
+appear in the notes.\\
+
+In case you ever need to guarantee notes only things where the default may not
+kick in, then use
+\begin{verbatim}
+\mode<article> {
+stuff in here will be notes only
+}
+\end{verbatim}
+
+For content, this should never need to be used.  It's more useful for editing
+the control flow of the latex templates before the content.
+
+\end{document}

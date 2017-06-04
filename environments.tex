@@ -1,0 +1,38 @@
+% environments.tex
+% This is where custom environments like newtheorems etc are defined.
+
+%------------------------------------------------------------------------------
+% THEOREM ENVIRONMENTS : GLOBAL
+%------------------------------------------------------------------------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem*{chklst}{Check List}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{algorithm}[theorem]{Algorithm}
+
+%------------------------------------------------------------------------------
+% THEOREM ENVIRONMENT STYLES : NOTES ONLY
+%------------------------------------------------------------------------------
+\mode<article> {
+\theoremstyle{plain}
+}
+
+%------------------------------------------------------------------------------
+% ENVIRONMENTS : GLOBAL
+%------------------------------------------------------------------------------
+
+
+\newenvironment{checklist}{
+\hrulefill
+\begin{chklst}
+\mbox{}
+
+}{\end{chklst} \hrulefill}

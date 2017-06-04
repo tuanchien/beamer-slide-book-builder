@@ -1,0 +1,47 @@
+% packages.tex
+% Loads the packages required for build.
+
+%------------------------------------------------------------------------------
+% GLOBAL (load in all circumstances)
+%------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{latexsym}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage[dvips]{epsfig}
+\usepackage{graphicx} % Allows graphics import.
+\usepackage{times}
+\usepackage{float} % Float environment for figures/pictures.
+\usepackage{multicol} % Used for tables.
+\usepackage{multirow} % Used for tables.
+\usepackage{fancybox} % Boxes and frames.
+\usepackage{framed} % Frames around text, etc.
+\usepackage{stackrel} % Putting things above/below other things, e.g., with arrows.
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{hyperref} % Gives nice hyperlinks in notes.
+\usepackage{verbatim} % Typewriter style. Used for displaying code.
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{caption}
+\usepackage{subcaption}
+
+%------------------------------------------------------------------------------
+% NOTES ONLY
+%------------------------------------------------------------------------------
+\mode<article> {
+\usepackage{paralist} % Gives nice list/enum control. Not strictly necessary.
+\usepackage[english]{babel}
+}
+
+%------------------------------------------------------------------------------
+% SLIDES ONLY
+%------------------------------------------------------------------------------
+\mode<presentation> {
+ % Necessary for beamer slides.
+}
